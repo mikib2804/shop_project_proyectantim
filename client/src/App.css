@@ -1,0 +1,63 @@
+body{
+  background: #f3f3f3;
+}
+.container {
+background: rgba(81, 140, 211, 0.9);
+color: white;
+box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
+width: 400px;
+padding: 20px;
+border-radius: 10px;
+position: absolute;
+top: 30%;
+left: 40%;
+}
+.heading{
+  text-align: center;
+  font-size: 40px;
+  font-family: cursive;
+}
+.input-group{
+  display: flex;
+  flex-direction: column;
+  line-height: 30px;
+  margin: 15px;
+}
+.input-label{
+  font-size: 25px;
+  margin-bottom: 2px;
+  display: block;
+  text-align: center;
+}
+.input-box{
+  padding: 15px;
+  border-radius: 10px;
+  border-color: aqua;
+  font-size: 25px;
+  display: block;
+  margin: auto;
+}
+.btn{
+  background: rebeccapurple;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 25px;
+  border: 1px solid aqua;
+  padding: 10px 40px;
+  box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: block;
+}
+.text-center{
+  text-align: center;
+}
+.btn-primary{
+  margin: auto;
+  margin-top: 10%;
+
+}
+.FaRegUserIcon{
+  cursor: pointer;
+}
