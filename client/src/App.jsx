@@ -2,22 +2,23 @@ import React,{useEffect,useState} from 'react'
 import Display from './components/Display';
 import {
   BrowserRouter as Router,
-  //hii
   Switch,
   Route,
 } from "react-router-dom";
+import HomePage from './components/HomePage';
 import InputLine from './components/InputLine';
 import ApiRequest from './components/ApiRequest';
-import Register from './components/register';
+import Register from './components/Register';
 import "./App.css";
 
 
 function App() 
 {
   const API_URL = 'http://localhost:3000/api/login';
-  const [backehandData,setbackehandData]=useState([{}])
   const [users, setUsers] = useState([]);
+  
   useEffect(()=>{
+
     async function start() {
       const data = await fetch(API_URL, { method: 'GET' }).then(response => response.json())
       .then(data => {setUsers(data)}).catch((err) => console.log(err))
@@ -32,8 +33,15 @@ function App()
          
          <Router>
           <Switch>
+            <Route path="/home">
+              <HomePage/>
+            </Route>
             <Route path="/login" >
-              <InputLine/>
+              <InputLine>
+                <Route path="/home">
+                  <HomePage/>
+              </Route>
+              </InputLine>
             </Route>
             <Route path="/register">
               <Register  users={users} setUsers={setUsers}/>

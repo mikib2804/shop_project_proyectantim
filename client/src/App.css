@@ -1,63 +1,34 @@
-body{
-  background: #f3f3f3;
+body {
+  background-color: #f8f9fa;
 }
-.container {
-background: rgba(81, 140, 211, 0.9);
-color: white;
-box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
-width: 400px;
-padding: 20px;
-border-radius: 10px;
-position: absolute;
-top: 30%;
-left: 40%;
-}
-.heading{
-  text-align: center;
-  font-size: 40px;
-  font-family: cursive;
-}
-.input-group{
-  display: flex;
-  flex-direction: column;
-  line-height: 30px;
-  margin: 15px;
-}
-.input-label{
-  font-size: 25px;
-  margin-bottom: 2px;
-  display: block;
-  text-align: center;
-}
-.input-box{
-  padding: 15px;
-  border-radius: 10px;
-  border-color: aqua;
-  font-size: 25px;
-  display: block;
+.login-container {
+  max-width: 50%;
   margin: auto;
+  margin-top: 20%;
+  padding: 5%;
+  border: 1px solid #e1e1e1;
+  border-radius: 5px;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
-.btn{
-  background: rebeccapurple;
+.buttonClass{
+  margin: auto;
+  text-align: center;
   justify-content: center;
-  color: white;
-  font-weight: bold;
-  font-size: 25px;
-  border: 1px solid aqua;
-  padding: 10px 40px;
-  box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
-  border-radius: 10px;
+  align-items: center;
+  display: flex;
+  background-color: #007bff;
+  width: 50%;
+  border-radius:5px;
+  
+}
+.registPage{
   cursor: pointer;
-  display: block;
+  width: 10%;
 }
-.text-center{
-  text-align: center;
-}
-.btn-primary{
-  margin: auto;
-  margin-top: 10%;
-
-}
-.FaRegUserIcon{
-  cursor: pointer;
+.btn-primary {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+  width: 100%;
 }

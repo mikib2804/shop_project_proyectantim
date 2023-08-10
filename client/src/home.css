@@ -1,0 +1,36 @@
+/* 
+body {
+    margin: 0;
+    padding: 0;
+    color: #292929;
+    font: 90% Roboto, Arial, sans-serif;
+    font-weight: 300;
+    box-sizing: border-box;
+}
+
+div#header h1 {
+    height: 80px;
+    line-height: 80px;
+    margin: 0;
+    padding-left: 10px;
+    color: white;
+    margin-left: 5%;
+}
+
+div#header li {
+    align-items: center;
+    justify-content: center;
+    margin-top: 28px;
+    padding-left: 10%;
+    color: white;
+}
+ */
+div#footer {
+    background: #42444e;
+    color: #fff;
+}
+div#footer p {
+    padding: 20px 10px;
+    text-align: center;
+}
+

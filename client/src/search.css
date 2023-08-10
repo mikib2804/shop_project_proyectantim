@@ -1,0 +1,20 @@
+.searchForm label {
+    position: absolute;
+    left: -99999px;
+  }
+  
+  .searchForm input[type='text'] {
+    flex-grow: 1;
+    min-width: 150%;
+    min-height: 30px;
+    font-size: 1rem;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    outline: none;
+
+  }
+  @media screen and (max-width: 992px) {
+    .searchForm {
+      min-width: 100%;
+    }
+  }
