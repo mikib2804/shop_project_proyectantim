@@ -28,9 +28,13 @@
     "react-bootstrap": "^2.8.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.10.1",
+    "react-modal": "^3.16.1",
     "react-router-dom": "^5.3.4",
+    "react-sweetalert2": "^0.6.0",
     "reactjs-popup": "^2.0.5",
-    "styled-components": "^5.3.11"
+    "styled-components": "^5.3.11",
+    "swal": "^0.1.0",
+    "sweetalert2": "^11.7.22"
   },
   "devDependencies": {
     "@types/react": "^18.0.27",

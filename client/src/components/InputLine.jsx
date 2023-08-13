@@ -26,12 +26,16 @@ const InputLine = ({ users,setUsers }) => {
         //TODO
     }
     const checkUser=async(e)=>{
+      e.preventDefault();
       const myNewUser = {password,userName};
       console.log(myNewUser);
       const response=await axios.post(API_URL,  { myNewUser })
       if(response){
-         window.location.replace('/home');
-         console.log(response.data.message)
+        console.log(response.data.message)
+        window.location.replace('/home');
+      }
+      else{
+        console.log("no")
       }
     }
     
@@ -58,17 +62,21 @@ const InputLine = ({ users,setUsers }) => {
                     onChange={(e) => setPassword(e.target.value)}
                     autoComplete="off"/>
                 </div>
-                <div className="buttonClass"><button type="submit" className="btn btn-primary w-100"
-                value="Submit" 
-                onClick={checkUser}><GoFileSubmodule/></button></div>
+                <div className="buttonClass">
+                    <button type="submit" className="btn btn-primary w-100"
+                      value="Submit" 
+                      onClick={checkUser}>
+                      <GoFileSubmodule />
+                  </button>
+                </div>
                 <div className="registPage">
-                <FaRegUser
-                onClick={refreshPage}
-                className="FaRegUserIcon"
-                  role="button"
-                  tabIndex="0"
-                  aria-label={`Route`}
-              />
+                    <FaRegUser
+                      onClick={refreshPage}
+                      className="FaRegUserIcon"
+                      role="button"
+                      tabIndex="0"
+                      aria-label={`Route`}
+                  />
                 </div>
 
             </form>

@@ -1,14 +1,17 @@
 import {React,useState }from 'react'
-import '../Nav.css'
 import {AiOutlineShoppingCart,AiOutlineClose} from "react-icons/ai";
 import {BsFillInfoCircleFill} from "react-icons/bs";
 import SearchItem from './SearchItem';
 import Popup from 'reactjs-popup';
 import {IoIosListBox} from 'react-icons/io'
-
-
+import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap'; 
+import ReactModal from 'react-modal';
+import { Padding } from '@mui/icons-material';
+import SweetAlert2 from 'react-sweetalert2';
+import Swal from 'sweetalert2';
 function NavBar({backehandData}) {
     const [search, setSearch] = useState('');
+    const [isOpen, setIsOpen] = useState(false);
     const checkUser=async(e)=>{
         const myNewUser = {password,userName};
         console.log(myNewUser);
@@ -21,41 +24,39 @@ function NavBar({backehandData}) {
     console.log(search);
   return (
     <>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
-</nav>
+    <nav className="fixed-top navbar navbar-expand-lg navbar-dark bg-dark">
+      <h1 className="text-white">Your Logo</h1>
+      <div className="collapse navbar-collapse d-flex justify-content-center justify-content-evenly " id="navbarNav">
+        <ul className="navbar-nav ">
+          <div type="button" className="btn btn-light ml-4" >
+          <AiOutlineShoppingCart />
+          </div >
+          <div type="button" className="btn btn-light ml-4" >
+          <IoIosListBox />
+          </div >
+          <div  >
+          <button type="button" className="btn btn-light ml-4"  onClick={() => {
+                Swal.fire({
+                  icon: 'info',
+                  title: 'WebBoutique: The Virtual Emporium of Wonders',
+                  text:"In the heart of the digital age, a revolutionary online store emerged that captured the essence of both convenience and enchantment—WebBoutique. This cybernetic emporium was more than just a platform; it was an experience that redefined the way people shopped.Navigating to WebBoutique's sleek interface was like stepping into a realm of endless possibilities. Users were greeted by an interactive cityscape, where every building housed a different category of products. A virtual avatar guided shoppers, showing them around the vibrant streets and directing them to the most unique wares.The visionary mind behind WebBoutique, known as the Digital Curator, meticulously handpicked items from around the world to create an eclectic collection that ranged from rare antiques to futuristic gadgets. Each product came with a captivating backstory, and users could dive deep into the history and craftsmanship with a mere click.Amid the diverse range of shoppers, two characters stood out:emily, a passionate globetrotter, stumbled upon WebBoutique while searching for a memento from her travels. The platform's immersive design not only showcased products but also transported her to the places they originated from. She found herself virtually wandering through bustling marketplaces in far-off lands, experiencing cultures through her screen.Alex, a tech-savvy inventor, was drawn to WebBoutique to showcase his ingenious creations. The platforms emphasis on storytelling allowed him to share the inspiration behind his gadgets, fostering a sense of community among fellow innovators. Soon, Alex's products were flying off the digital shelves, connecting him to customers he never thought possible. As WebBoutique gained popularity, it ignited conversations about the evolution of commerce and the power of storytelling in selling. Emily and Alex symbolized this shift: Emily discovered a way to relive her adventures through curated products, while Alex found a digital stage to showcase his innovations.The WebBoutique story celebrates the fusion of innovation and human connection. It emphasizes that even in a world dominated by screens, the magic of discovery and the art of curation can still evoke wonder. In the ever-expanding digital landscape, WebBoutique stands as a beacon, reminding us that technology, when crafted with imagination, can transport us to places beyond our screens.",
+                  showConfirmButton: false,
+                  showCloseButton: true,
+                })
+            }} >
+              <BsFillInfoCircleFill/>
+            </button >
+          </div >
+          <li className="nav-item">
+          <SearchItem
+                    search={search}
+                    setSearch={setSearch}   
+                />
+          
+          </li>
+        </ul>
+      </div>
+    </nav>
     </>
   )
 }
