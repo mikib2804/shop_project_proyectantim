@@ -7,9 +7,9 @@ import {
 } from "react-router-dom";
 import HomePage from './components/HomePage';
 import InputLine from './components/InputLine';
-import ApiRequest from './components/ApiRequest';
 import Register from './components/Register';
 import "./App.css";
+import AddFileToServer from './components/AddFileToServer';
 
 
 function App() 
@@ -46,7 +46,9 @@ function App()
             <Route path="/register">
               <Register  users={users} setUsers={setUsers}/>
             </Route>
-            
+            <Route path="/aploadFile">
+              <AddFileToServer />
+            </Route>
           </Switch>
          </Router>
     </>

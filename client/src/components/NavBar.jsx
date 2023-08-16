@@ -2,13 +2,10 @@ import {React,useState }from 'react'
 import {AiOutlineShoppingCart,AiOutlineClose} from "react-icons/ai";
 import {BsFillInfoCircleFill} from "react-icons/bs";
 import SearchItem from './SearchItem';
-import Popup from 'reactjs-popup';
 import {IoIosListBox} from 'react-icons/io'
-import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap'; 
-import ReactModal from 'react-modal';
-import { Padding } from '@mui/icons-material';
-import SweetAlert2 from 'react-sweetalert2';
+import {AiOutlineFileImage} from 'react-icons/ai'
 import Swal from 'sweetalert2';
+
 function NavBar({backehandData}) {
     const [search, setSearch] = useState('');
     const [isOpen, setIsOpen] = useState(false);
@@ -21,10 +18,13 @@ function NavBar({backehandData}) {
            console.log(response.data.message)
         }
       }
+      const refreshPage = ()=>{
+        window.location.replace('/aploadFile');
+        }
     console.log(search);
   return (
     <>
-    <nav className="fixed-top navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav className="fixed-top navbar navbar-expand-lg navbar-dark bg-dark ">
       <h1 className="text-white">Your Logo</h1>
       <div className="collapse navbar-collapse d-flex justify-content-center justify-content-evenly " id="navbarNav">
         <ul className="navbar-nav ">
@@ -33,6 +33,9 @@ function NavBar({backehandData}) {
           </div >
           <div type="button" className="btn btn-light ml-4" >
           <IoIosListBox />
+          </div >
+          <div type="button" className="btn btn-light ml-4" onClick={refreshPage}>
+          <AiOutlineFileImage />
           </div >
           <div  >
           <button type="button" className="btn btn-light ml-4"  onClick={() => {

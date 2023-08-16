@@ -3,7 +3,6 @@ import React, { useState,useEffect } from "react";
 import { GoFileSubmodule } from "react-icons/go";
 import { FaTrashAlt } from 'react-icons/fa';
 import Display from "./Display";
-import apiRequest from './ApiRequest';
 import{FaRegUser} from 'react-icons/fa';
 import { BrowserRouter as Router, Route,Switch,Link } from "react-router-dom";
 import axios from "axios";
@@ -107,7 +106,7 @@ const  addUser= async ()=> {
                         onChange={(e) => setAddress(e.target.value)}
                         autoComplete="off" />
                     </div>
-                    <div className="buttonClass"><button className="btn btn-primary" type="submit"><GoFileSubmodule/></button></div>
+                    <div className="buttonClass"><button className="btn btn-primary" type="submit" onClick={handleClick}><GoFileSubmodule/></button></div>
                     <div className="registPage">
                 <FaRegUser
                 onClick={refreshPage}
@@ -121,95 +120,6 @@ const  addUser= async ()=> {
             </div>
         </div>
     </>
-
-                // <form className="container">
-                // <label className="input-label">
-                // <h2 className="heading">Registration</h2>
-                // <label htmlFor="firstName" className="input-label">firstName</label>  
-                    // <input className="input-box" type="text" 
-                    //     id="message"
-                    //     name="message"
-                    //     value={firstName}
-                    //     onChange={(e) => setFirstName(e.target.value)}
-                    //     autoComplete="off" />
-                // </label>
-                // <label className="input-label" ><br></br>
-                // <label htmlFor="lastName" className="input-label">lastName</label>
-                //     <input className="input-box" type="text" 
-                //         id="message"
-                //         name="message"
-                        // value={lastName}
-                        // onChange={(e) => setLastName(e.target.value)}
-                        // autoComplete="off" />
-                // </label>
-        
-                // <label className="input-label" ><br></br>
-                // <label htmlFor="eamil" className="input-label">Eamil</label>
-                //     <input className="input-box" type="text" 
-                //         id="message"
-                //         name="message"
-                        // value={eamil}
-                        // onChange={(e) => setEmail(e.target.value)}
-                        // autoComplete="off" />
-                // </label>
-                // <label className="input-label" ><br></br>
-                // <label htmlFor="address" className="input-label">Address</label>
-                //     <input className="input-box" type="text" 
-                //         id="message"
-                //         name="message"
-                //         value={address}
-                //         onChange={(e) => setAddress(e.target.value)}
-                //         autoComplete="off" />
-                // </label>
-                // <label className="input-label" ><br></br>
-                // <label htmlFor="address" className="input-label">PhoneNumber</label>
-                //     <input className="input-box" type="text" 
-                //         id="message"
-                //         name="message"
-                //         value={phoneNumber}
-                //         onChange={(e) => setPhoneNumber(e.target.value)}
-                //         autoComplete="off" />
-                // </label>
-                // <label className="input-label" ><br></br>
-                // <label htmlFor="password" className="input-label">Password</label>
-                //     <input className="input-box" type="text" 
-                //         id="message"
-                //         name="message"
-                //          value={password}
-                //         onChange={(e) => setPassword(e.target.value)}
-                //         autoComplete="off" />
-                // </label>
-                // <label className="input-label" ><br></br>
-                // <label htmlFor="UserName" className="input-label">UserName</label>
-                //     <input className="input-box" type="text" 
-                //         id="message"
-                //         name="message"
-                //         value={userName}
-                //         onChange={(e) => setUserName(e.target.value)}
-                //         autoComplete="off" />
-                // </label>
-                // <GoFileSubmodule className="btn btn-primary" type="submit"
-                //   value="Submit" 
-                //   onClick={handleClick}
-                //   />
-                //   <br></br>
-                //   <FaRegUser
-                //         className="FaRegUserIcon"
-                //         onClick={refreshPage}
-                //         role="button"
-                //         tabIndex="0"
-                //         aria-label={`Delete`}
-                        
-                //     />
-                //     <FaTrashAlt 
-                //          className="FaTrashAltIcon"
-                //         onClick={handleDelete}
-                //         role="button"
-                //         tabIndex="0"
-                //         aria-label={`Delete`}
-                //     />
-                //     <Display curent={curent}/>
-                // </form>
                 
           )
         

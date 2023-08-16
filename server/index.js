@@ -1,5 +1,5 @@
 const express = require('express');
-const cors = require('cors')
+const cors = require('cors')//accept users to the site
 const bodyParser = require('body-parser'); // Fix the variable name spelling
 const connectDb = require('./db');
 const app = express();
