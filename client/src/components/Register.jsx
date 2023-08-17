@@ -4,9 +4,9 @@ import { GoFileSubmodule } from "react-icons/go";
 import { FaTrashAlt } from 'react-icons/fa';
 import Display from "./Display";
 import{FaRegUser} from 'react-icons/fa';
-import { BrowserRouter as Router, Route,Switch,Link } from "react-router-dom";
 import axios from "axios";
 import "../registerS.css"
+import {useNavigate} from "react-router-dom"
 
 const Register = ({ users,setUsers }) => {
 const [firstName, setFirstName] = useState('');
@@ -19,7 +19,7 @@ const [userName, setUserName] = useState('');
 const [curent, setCurent] = useState(false);
 const API_URL = 'http://localhost:3000/api/register';
 const [fetchError, setFetchError] = useState(null);
-
+const navigate=useNavigate();
 const handleClick = (e) => {
     e.preventDefault();
     console.log("button clicked")
@@ -28,7 +28,7 @@ const handleClick = (e) => {
     //TODO
 }
 const refreshPage = ()=>{
-    window.location.replace('/login');
+    navigate('/login');
     }
 const  addUser= async ()=> {
         // POST request using axios with set headers

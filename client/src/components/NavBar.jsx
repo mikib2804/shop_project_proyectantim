@@ -6,8 +6,8 @@ import {IoIosListBox} from 'react-icons/io'
 import {AiOutlineFileImage} from 'react-icons/ai'
 import Swal from 'sweetalert2';
 
-function NavBar({backehandData}) {
-    const [search, setSearch] = useState('');
+function NavBar({backehandData,search,setSearch}) {
+
     const [isOpen, setIsOpen] = useState(false);
     const checkUser=async(e)=>{
         const myNewUser = {password,userName};

@@ -16,9 +16,6 @@ exports.deleteCustomer=async(req,res)=>{
 
    //console.log(product)
 }
-const responseData = {
-    message: 'THE SERVER FOUND THE USER',
-  };
   
 exports.loginCustomer= async(req,res)=>{
     const newUser=req.body.myNewUser;
@@ -33,7 +30,7 @@ exports.loginCustomer= async(req,res)=>{
             console.error('Error comparing passwords:', err);
           } else if (result) {
             console.log('Password matches!'); 
-            res.json(responseData);
+            res.json(user);
           } else {
             console.log('Invalid password.');
           }

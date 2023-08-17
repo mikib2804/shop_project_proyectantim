@@ -1,10 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import Display from './components/Display';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from "react-router-dom";
+import {  BrowserRouter as Router, Link, Route, Routes,Outlet } from "react-router-dom";
 import HomePage from './components/HomePage';
 import InputLine from './components/InputLine';
 import Register from './components/Register';
@@ -16,7 +12,7 @@ function App()
 {
   const API_URL = 'http://localhost:3000/api/login';
   const [users, setUsers] = useState([]);
-  
+  const [logedUser, setLogedUser] = useState();
   useEffect(()=>{
 
     async function start() {
@@ -24,32 +20,24 @@ function App()
       .then(data => {setUsers(data)}).catch((err) => console.log(err))
   }
   start();
-        
+    
   },[])
-
+  console.log(logedUser) 
   return (
     <>
          {/* <Register users={users} setUsers={setUsers}/>  */}
          
          <Router>
-          <Switch>
-            <Route path="/home">
-              <HomePage/>
+          <Routes>
+            <Route path="/home" element={ <HomePage logedUser={logedUser} setLogedUser={setLogedUser}/>}/>
+            <Route path="/login" element={<InputLine logedUser={logedUser} setLogedUser={setLogedUser}>  
+            <Outlet />
+              </InputLine>} >
+              <Route path="home" element={<HomePage/>}/>   
             </Route>
-            <Route path="/login" >
-              <InputLine>
-                <Route path="/home">
-                  <HomePage/>
-              </Route>
-              </InputLine>
-            </Route>
-            <Route path="/register">
-              <Register  users={users} setUsers={setUsers}/>
-            </Route>
-            <Route path="/aploadFile">
-              <AddFileToServer />
-            </Route>
-          </Switch>
+            <Route path="/register" element={<Register  users={users} setUsers={setUsers}/>}/> 
+            <Route path="/aploadFile" element={<AddFileToServer/>}/>
+          </Routes>
          </Router>
     </>
   )

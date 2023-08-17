@@ -1,15 +1,13 @@
 //rafc
 import React, { useState,useEffect } from "react";
+import {useNavigate} from "react-router-dom"
 import { GoFileSubmodule } from "react-icons/go";
 import { FaTrashAlt } from 'react-icons/fa';
 import Display from "./Display";
 import{FaRegUser} from 'react-icons/fa';
-
-import { BrowserRouter as Router, Route,Switch,Link } from "react-router-dom";
 import axios from "axios";
-import { useHistory } from 'react-router-dom';
-const InputLine = ({ users,setUsers }) => {
- 
+const InputLine = ({ users,setUsers,logedUser,setLogedUser }) => {
+    const navigate=useNavigate();
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [curent, setCurent] = useState(false);
@@ -30,8 +28,10 @@ const InputLine = ({ users,setUsers }) => {
       console.log(myNewUser);
       const response=await axios.post(API_URL,  { myNewUser })
       if(response){
-        console.log(response.data.message)
-        window.location.replace('/home');
+        console.log(response.data)
+        setLogedUser(response.data)
+        navigate('/home')
+        //window.location.replace('/home');
       }
       else{
         console.log("no")
@@ -39,7 +39,7 @@ const InputLine = ({ users,setUsers }) => {
     }
     
     const refreshPage = ()=>{
-      window.location.replace('/register');
+      navigate('/register')
    }
     return (
     <>
