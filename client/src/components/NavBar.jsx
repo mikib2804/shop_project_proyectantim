@@ -5,10 +5,44 @@ import SearchItem from './SearchItem';
 import {IoIosListBox} from 'react-icons/io'
 import {AiOutlineFileImage} from 'react-icons/ai'
 import Swal from 'sweetalert2';
-
-function NavBar({backehandData,search,setSearch}) {
-
+import withReactContent from 'sweetalert2-react-content';
+function NavBar({backehandData,search,setSearch,logedUser,dataToServer,setdataToServer}) {
+    const MySwal = withReactContent(Swal);
     const [isOpen, setIsOpen] = useState(false);
+    console.log(dataToServer);
+    const ObjectList=( )=> {
+      return (
+        <div>
+          <ul>
+            {dataToServer.map((object, index) => (
+              <div className='row d-flex justify-content-between'>
+                <div  key={index}>{object.NameIt} 
+                <div >
+                <img src={`data:image/jpeg;base64,${object.BufferIt}`}
+                style={{ maxWidth: '50px', maxHeight: '50px' }}/> 
+              </div></div>
+              
+              </div>
+              
+              
+              
+              
+            ))}
+          </ul>
+        </div>
+      );
+    }
+
+
+
+    const openObjectListModal = () => {
+      MySwal.fire({
+        title: 'List of Objects',
+        html: <ObjectList/>,
+        showCancelButton: true,
+        cancelButtonText: 'Close',
+      });
+    };
     const checkUser=async(e)=>{
         const myNewUser = {password,userName};
         console.log(myNewUser);
@@ -28,8 +62,13 @@ function NavBar({backehandData,search,setSearch}) {
       <h1 className="text-white">Your Logo</h1>
       <div className="collapse navbar-collapse d-flex justify-content-center justify-content-evenly " id="navbarNav">
         <ul className="navbar-nav ">
-          <div type="button" className="btn btn-light ml-4" >
-          <AiOutlineShoppingCart />
+          <div >
+          <button type="button" className="btn btn-light ml-4"  onClick={() => {
+                openObjectListModal()
+            }} >
+              <AiOutlineShoppingCart />
+            </button >
+          
           </div >
           <div type="button" className="btn btn-light ml-4" >
           <IoIosListBox />
@@ -59,6 +98,7 @@ function NavBar({backehandData,search,setSearch}) {
           </li>
         </ul>
       </div>
+       <h2 className="text-white">Hello {typeof logedUser===undefined?'Null':logedUser.logedUser.userName} !!</h2>
     </nav>
     </>
   )

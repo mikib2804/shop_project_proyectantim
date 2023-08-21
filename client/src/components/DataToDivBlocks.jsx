@@ -2,14 +2,34 @@ import React, { useState, useEffect } from 'react';
 import "../dataToDiv.css";
 import {BsFillInfoCircleFill} from "react-icons/bs";
 import Swal from 'sweetalert2';
-const DataToDivBlocks = ({ data,imageData,search,logedUser,setLogedUser  }) => {
-  const [cust, setCust] = useState(null);
-
-  const sendOrder=(item)=>{
-
-    setCust(item._id)
-    console.log("home block",cust);
+import axios from "axios";
+const DataToDivBlocks = ({data,imageData,search,logedUser,dataToServer,setdataToServer}) => {
+  const API_URL = 'http://localhost:3000/api/home/prod';
+  const resetArray = () => {
+    setdataToServer([]);
+  };
+  const sendOrder = async(item)=>{
+    // setdataToServer(oldArray => [...oldArray, logedUser.logedUser._id]);
+    let found=false;
+    //const findProd=dataToServer.filter( Ditem => Ditem.IdIt === item._id);
+    if(dataToServer.length===0){
+      const NewProduct = {IdIt: item._id,NameIt:item.GenericName,AmountIt:item.Amount ,PriceIt:item.Price,MyAmount:0,BufferIt:item.buffer};
+      setdataToServer(oldArray => [...oldArray, NewProduct]);
+    }
+    else if(dataToServer.length>0 && !found){
+      dataToServer.map((Ditem, index) =>{
+        if(Ditem.IdIt === item._id){
+          console.log(dataToServer[index].MyAmount);
+          dataToServer[index].MyAmount+=1;
+          found=true;
+        }
+      })
+    } if(!found&&dataToServer.length!==0){
+      const NewProduct = {IdIt: item._id,NameIt:item.GenericName,AmountIt:item.Amount ,PriceIt:item.Price,MyAmount:0,BufferIt:item.buffer};
+      setdataToServer(oldArray => [...oldArray, NewProduct]);
+    }
   }
+  console.log(dataToServer);
   const DisplayData=()=>{
     if(!search){
       return (<div className="div-blocks-container ">

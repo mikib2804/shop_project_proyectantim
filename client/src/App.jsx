@@ -22,14 +22,14 @@ function App()
   start();
     
   },[])
-  console.log(logedUser) 
+
   return (
     <>
          {/* <Register users={users} setUsers={setUsers}/>  */}
          
          <Router>
           <Routes>
-            <Route path="/home" element={ <HomePage logedUser={logedUser} setLogedUser={setLogedUser}/>}/>
+            <Route path="/home" element={ <HomePage logedUser={logedUser} setLogedUser={setLogedUser} />}/>
             <Route path="/login" element={<InputLine logedUser={logedUser} setLogedUser={setLogedUser}>  
             <Outlet />
               </InputLine>} >

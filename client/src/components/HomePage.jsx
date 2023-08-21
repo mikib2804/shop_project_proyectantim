@@ -7,6 +7,8 @@ function HomePage(logedUser,setLogedUser ) {
   const API_URL = 'http://localhost:3000/api/home';
   const [backehandData,setbackehandData]=useState([])
   const [ImageBackehandData,setImageBackehandData]=useState([])
+  const [dataToServer,setdataToServer]=useState([])
+
   const [search, setSearch] = useState('');
   useEffect(()=>{
     async function start() {
@@ -15,20 +17,19 @@ function HomePage(logedUser,setLogedUser ) {
   }
   start();
   },[])
-   
-  console.log(ImageBackehandData)
+
+  //console.log(logedUser.logedUser.userName) 
   return (
     <>
-    
-        <div id="container" >
-            <NavBar backehandData={backehandData} search={search} setSearch={setSearch}  />
-            <br></br>
-            <br></br>
-            <br></br>
-        </div>
-        <DataToDivBlocks data={backehandData} imageData={ImageBackehandData} search={search} setSearch={setSearch}  logedUser={logedUser} setLogedUser={setLogedUser} />
-        <div id="footer"><p>Project@2023</p>
-            </div>
+    { logedUser.logedUser === undefined || logedUser.logedUser === null?window.location.replace('/login'):        
+    <><div id="container">
+          <NavBar backehandData={backehandData} search={search} setSearch={setSearch}
+            logedUser={logedUser} dataToServer={dataToServer} setdataToServer={setdataToServer} />
+          <br></br>
+          <br></br>
+          <br></br>
+        </div><DataToDivBlocks data={backehandData} imageData={ImageBackehandData} search={search} setSearch={setSearch} logedUser={logedUser} dataToServer={dataToServer} setdataToServer={setdataToServer} /><div id="footer"><p>Project@2023</p>
+          </div></>}
         </>
   )
 }

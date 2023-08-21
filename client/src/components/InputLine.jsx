@@ -25,7 +25,7 @@ const InputLine = ({ users,setUsers,logedUser,setLogedUser }) => {
     const checkUser=async(e)=>{
       e.preventDefault();
       const myNewUser = {password,userName};
-      console.log(myNewUser);
+      //console.log(myNewUser);
       const response=await axios.post(API_URL,  { myNewUser })
       if(response){
         console.log(response.data)
@@ -60,6 +60,7 @@ const InputLine = ({ users,setUsers,logedUser,setLogedUser }) => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     autoComplete="off"/>
+                    <Display/>
                 </div>
                 <div className="buttonClass">
                     <button type="submit" className="btn btn-primary w-100"
