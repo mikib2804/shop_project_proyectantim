@@ -7,5 +7,5 @@ module.exports= mongoose.model('Customer',{
     address:{type:String},
     phoneNumber:{type:Number},
     password:{type:String},
-    purchasedItems: [{ type: mongoose.Schema.Types.ObjectId, ref: 'StoreItem' }],
+    orderHistory: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Order' }]
 })

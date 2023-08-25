@@ -48,7 +48,6 @@ const  addUser= async ()=> {
         if (response) {
             console.log(response)
             }
-            
     }
     return (
     <>

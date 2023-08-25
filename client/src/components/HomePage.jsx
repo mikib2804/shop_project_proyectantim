@@ -23,7 +23,7 @@ function HomePage(logedUser,setLogedUser ) {
     <>
     { logedUser.logedUser === undefined || logedUser.logedUser === null?window.location.replace('/login'):        
     <><div id="container">
-          <NavBar backehandData={backehandData} search={search} setSearch={setSearch}
+          <NavBar imageData={ImageBackehandData} backehandData={backehandData} search={search} setSearch={setSearch}
             logedUser={logedUser} dataToServer={dataToServer} setdataToServer={setdataToServer} />
           <br></br>
           <br></br>

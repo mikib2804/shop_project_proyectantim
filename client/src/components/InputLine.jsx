@@ -17,8 +17,6 @@ const InputLine = ({ users,setUsers,logedUser,setLogedUser }) => {
     
     const handleClick = (e) => {
         e.preventDefault();
-        console.log("button clicked")
-        console.log(userName);
         userName.trim().length !== 0*password.trim().length !== 0?(console.log('input value is NOT empty'),setCurent(true)):console.log('input value is empty');
         //TODO
     }
@@ -28,7 +26,6 @@ const InputLine = ({ users,setUsers,logedUser,setLogedUser }) => {
       //console.log(myNewUser);
       const response=await axios.post(API_URL,  { myNewUser })
       if(response){
-        console.log(response.data)
         setLogedUser(response.data)
         navigate('/home')
         //window.location.replace('/home');

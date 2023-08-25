@@ -4,7 +4,7 @@ import {BsFillInfoCircleFill} from "react-icons/bs";
 import Swal from 'sweetalert2';
 import axios from "axios";
 const DataToDivBlocks = ({data,imageData,search,logedUser,dataToServer,setdataToServer}) => {
-  const API_URL = 'http://localhost:3000/api/home/prod';
+
   const resetArray = () => {
     setdataToServer([]);
   };
@@ -29,7 +29,7 @@ const DataToDivBlocks = ({data,imageData,search,logedUser,dataToServer,setdataTo
       setdataToServer(oldArray => [...oldArray, NewProduct]);
     }
   }
-  console.log(dataToServer);
+
   const DisplayData=()=>{
     if(!search){
       return (<div className="div-blocks-container ">

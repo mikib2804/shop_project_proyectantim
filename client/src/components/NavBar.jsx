@@ -1,78 +1,199 @@
-import {React,useState }from 'react'
+import {React,useState,useEffect }from 'react'
 import {AiOutlineShoppingCart,AiOutlineClose} from "react-icons/ai";
 import {BsFillInfoCircleFill} from "react-icons/bs";
 import SearchItem from './SearchItem';
 import {IoIosListBox} from 'react-icons/io'
 import {AiOutlineFileImage} from 'react-icons/ai'
 import Swal from 'sweetalert2';
+import axios from "axios";
 import withReactContent from 'sweetalert2-react-content';
+
+import { grey } from '@mui/material/colors';
 function NavBar({backehandData,search,setSearch,logedUser,dataToServer,setdataToServer}) {
     const MySwal = withReactContent(Swal);
+    const API_URL = 'http://localhost:3000/api/home/prod';
     const [isOpen, setIsOpen] = useState(false);
-    console.log(dataToServer);
+    const [orders,setOrders]=useState([]);
+    const [loading,setloading]=useState(true);
+    const [ordersData,setOrdersData]=useState([]);
+    const [selectedProd,setSelectedProd]=useState();
+    var totalSum=0;
+    useEffect(() => {
+      GetOrdersFromSrver();
+    },[]);
+    const GetTotalSum=()=>{
+      for (var i = 0; i < dataToServer.length; i++) {
+        totalSum+=(dataToServer[i].PriceIt*(dataToServer[i].MyAmount===0?dataToServer[i].MyAmount+1:dataToServer[i].MyAmount));
+      } 
+      return(totalSum);
+    }
+    
     const ObjectList=( )=> {
+      
       return (
+        
         <div>
           <ul>
             {dataToServer.map((object, index) => (
-              <div className='row d-flex justify-content-between'>
-                <div  key={index}>{object.NameIt} 
-                <div >
-                <img src={`data:image/jpeg;base64,${object.BufferIt}`}
-                style={{ maxWidth: '50px', maxHeight: '50px' }}/> 
-              </div></div>
-              
+              <div>
+              <div className="col-auto d-flex justify-content-start"  key={index}>
+              {object.MyAmount+1} {object.NameIt} 
               </div>
-              
-              
-              
-              
+              <div className="col-auto d-flex justify-content-end">
+              <img src={`data:image/jpeg;base64,${object.BufferIt}`}
+                style={{ maxWidth: '40px', maxHeight: '40px' }}/> 
+              </div>
+            </div>
             ))}
           </ul>
+          {GetTotalSum()} ₪
         </div>
       );
     }
+    const delay = ms => new Promise(
+      resolve => setTimeout(resolve, ms)
+    );
+    const GetOrdersFromSrver=async ()=>{
+      const response=await axios.get(`${API_URL}/order/${logedUser.logedUser._id}`)
+      setOrders(response.data);
+      setOrdersData(response.data);
+      const arrId=[];
+      for(var i=0;i<response.data.length;i++){
+          arrId.push(response.data[i]._id);
+      }
+      setOrders(arrId);
+      GetUserHistory();
+      setloading(false);
+      console.log(loading);
+    }
 
+  const GetProductItems=(prd)=>{
+
+    let arrImage=[];
+    backehandData.map((Ditem, index) => {
+      console.log("prd.prd.purchasedItems:",prd.prd.purchasedItems);
+      console.log("Ditem._id:",Ditem);
+      prd.prd.purchasedItems.map((prdItem, place) => {
+        if(prdItem===Ditem._id){
+          arrImage.push(Ditem.buffer)
+          console.log("hello");
+        }
+      })
+      
+    })
+    console.log(arrImage)
+    return (
+      <div>
+            <ul>
+              {prd.prd.purchasedItems.map((item, index) => (
+                <div key={index}>
+                <div className="col-auto d-flex justify-content-start "key={index}>
+                  <span>Item Id: {item}</span>
+                </div>
+                <img src={`data:image/jpeg;base64,${arrImage[index]}`}
+                style={{ maxWidth: '40px', maxHeight: '40px' }}/> 
+              </div>
+              ))}
+            </ul>
+      </div>
+    );
+  }
+const openOrdPrdModal =async(prd) => {
+
+    MySwal.fire({
+      title: `${prd._id} Order :`,
+      html: <GetProductItems prd={prd}/>,
+      showCancelButton: true,
+      cancelButtonText: 'Close',
+      confirmButtonColor: '#666666',
+  
+    })}
+const GetUserHistory=()=>{
+  return (
+    <div>
+          <ul>
+            {ordersData.map((item, index) => (
+              <div key={index}>
+              <div type="button" className="btn-light col-auto d-flex justify-content-start "key={index}onClick={()=>{setSelectedProd(item),openOrdPrdModal(item)}} >
+                <span>Order Id: {item._id}</span>
+              </div>
+            </div>
+            ))}
+          </ul>
+    </div>
+  );
+}
+
+const openOrdModal =async() => {
+  
+  MySwal.fire({
+    title: 'My Order List:',
+    html: <GetUserHistory/>,
+    showCancelButton: true,
+    cancelButtonText: 'Close',
+    confirmButtonColor: '#666666',
+
+  })}
 
 
     const openObjectListModal = () => {
+      
       MySwal.fire({
-        title: 'List of Objects',
+        title: 'My Item List:',
         html: <ObjectList/>,
         showCancelButton: true,
         cancelButtonText: 'Close',
-      });
-    };
-    const checkUser=async(e)=>{
-        const myNewUser = {password,userName};
-        console.log(myNewUser);
-        const response=await axios.post(API_URL,  { myNewUser })
+        confirmButtonText: 'Place Order $',
+        confirmButtonColor: '#666666',
+
+      }).then((result) => {
+        
+      if (result.isConfirmed) {
+        //i add this function to stop an eror of (PayloadTooLargeError: request entity too large)
+        for (var i = 0; i < dataToServer.length; i++) {
+          //console.log(dataToServer[i].BufferIt);
+          delete dataToServer[i].BufferIt;
+        } 
+        // console.log(logedUser.logedUser._id);
+        const User={idOfUser:logedUser.logedUser._id,LogeduserName:logedUser.logedUser.userName,orderSum:GetTotalSum(),addressOfUser:logedUser.logedUser.address}
+        console.log(dataToServer);
+        const response= axios.post(API_URL, {User,dataToServer })
+        console.log(response);
         if(response){
-           window.location.replace('/home');
-           console.log(response.data.message)
+          Swal.fire('Done!', 'The action was performed.', 'success');
+          console.log("order Placed ");
+          setdataToServer([]);
+          GetOrdersFromSrver();
+          totalSum*=0;
         }
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire('Cancelled', 'The action was cancelled.', 'error');
       }
+    });
+    };
       const refreshPage = ()=>{
         window.location.replace('/aploadFile');
         }
-    console.log(search);
   return (
     <>
     <nav className="fixed-top navbar navbar-expand-lg navbar-dark bg-dark ">
-      <h1 className="text-white">Your Logo</h1>
+      <h1 className="text-white">My Shop</h1>
       <div className="collapse navbar-collapse d-flex justify-content-center justify-content-evenly " id="navbarNav">
         <ul className="navbar-nav ">
           <div >
           <button type="button" className="btn btn-light ml-4"  onClick={() => {
-                openObjectListModal()
+                openObjectListModal();
             }} >
               <AiOutlineShoppingCart />
             </button >
           
           </div >
-          <div type="button" className="btn btn-light ml-4" >
-          <IoIosListBox />
-          </div >
+          <button type="button" className="btn btn-light ml-4"  onClick={() => {
+                GetOrdersFromSrver();
+                openOrdModal();
+            }} >
+              <IoIosListBox/>
+            </button >
           <div type="button" className="btn btn-light ml-4" onClick={refreshPage}>
           <AiOutlineFileImage />
           </div >
